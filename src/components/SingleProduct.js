@@ -9,7 +9,7 @@ function SingleProduct({prod}) {
   return (
     <div className='products'>
         <Card>
-            <Card.Img variant="top" src={prod.imgUrl} alt={prod.name}/>
+            <Card.Img variant="top" src={prod.imgUrl} alt={prod.name} style={{"height": "200px", "objectFit":"contain"}}/>
             <Card.Body>
                 <Card.Title>{prod.name}</Card.Title>
                 <Card.Subtitle>
@@ -32,6 +32,7 @@ function SingleProduct({prod}) {
                         })}
                     >Remove From Cart</Button> :
                     <Button 
+                        style={{marginTop:"10px"}}
                         disabled={!prod.inStock}
                         onClick={() => dispatch({
                             type: 'ADD_TO_CART',

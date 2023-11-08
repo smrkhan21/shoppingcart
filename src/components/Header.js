@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Badge, Button, Container, Dropdown, Form, FormControl, Nav, Navbar } from 'react-bootstrap';
 import { FaShoppingCart } from 'react-icons/fa';
@@ -7,7 +7,8 @@ import { AiFillDelete } from 'react-icons/ai';
 import './styles.css';
 
 function Header() {
-    const { state: { cart }, dispatch } = CartState();
+    const { state: { cart }, dispatch, productDispatch } = CartState();
+    const [searchFilter, setSearchFilter] = useState("");
     return (
         <>
             <Navbar bg="dark" variant="dark">
@@ -29,6 +30,15 @@ function Header() {
                             style={{ minWidth: 500 }}
                             placeholder={"Search a product"}
                             className="m-auto"
+                            value={searchFilter}
+                            onChange={(e) => {
+                                setSearchFilter(e.target.value)
+                                productDispatch({
+                                  type: "FILTER_BY_SEARCH",
+                                  payload: searchFilter
+                                })
+                            }
+                              }
                         />
                     </Navbar.Text>
                     <Nav>
